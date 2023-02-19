@@ -1,0 +1,27 @@
+<data name="ProductDataService" serviceNamespace="" serviceGroup="" transports="http https">
+  <description />
+  <config id="ProductDataSourceId">
+    <property name="driverClassName">com.mysql.jdbc.Driver</property>
+    <property name="url">jdbc:mysql://db4free.net:3306/product_db</property>
+    <property name="username">choreo_db_user</property>
+    <property name="password">productuser123</property>
+  </config>
+  <query id="GetProductDetails" useConfig="ProductDataSourceId">
+    <sql>SELECT id,product_name,product_code,price,price_currency FROM `products` where product_code=:product_code</sql>
+    <param name="product_code" paramType="SCALAR" sqlType="STRING" />
+    <result outputType="json">{
+   "Product":{
+            "ProductName":"$product_name",
+            "ProductCode":"$product_code",
+            "Price":"$price",
+            "PriceCurrency":"$price_currency"
+   }
+}</result>
+  </query>
+  <resource method="GET" path="product/{product_code}">
+    <description />
+    <call-query href="GetProductDetails">
+      <with-param name="product_code" query-param="product_code" />
+    </call-query>
+  </resource>
+</data>
