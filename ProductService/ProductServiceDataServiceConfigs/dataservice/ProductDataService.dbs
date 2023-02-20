@@ -20,8 +20,8 @@
   </resource>
   <config id="ProductDataSourceId">
     <property name="driverClassName">com.mysql.jdbc.Driver</property>
-    <property name="url">jdbc:mysql://db4free.net:3306/product_db</property>
+    <property name="url">$SYSTEM:db_url</property>
     <property name="username">$SYSTEM:db_uname</property>
-    <property name="password">productuser123</property>
+    <property name="password">$SYSTEM:db_password</property>
   </config>
 </data>
